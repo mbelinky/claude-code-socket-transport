@@ -1,5 +1,18 @@
 # claude-code-socket-transport
 
+Maintained fork of [PeterSR/claude-code-socket-transport](https://github.com/PeterSR/claude-code-socket-transport), retaining its MIT license and Git history.
+This fork adds a CLI for verified ask/reply exchanges with existing Claude
+sessions, peer identity checks, bounded waits, and connection cleanup.
+
+```sh
+go install github.com/mbelinky/claude-code-socket-transport/cmd/claude-socket@main
+claude-socket list
+claude-socket ask --session UUID --text 'What is the current status?'
+```
+
+See the [CLI guide](cmd/claude-socket/README.md) for receipt states, exit codes,
+permissions, and account profiles. The original `cc-send` CLI remains available.
+
 A Go library for delivering a message into a running Claude Code session over
 that session's Unix domain socket.
 
@@ -38,7 +51,7 @@ without that guarantee would defeat the point of the check.
 ## Install
 
 ```
-go get github.com/PeterSR/claude-code-socket-transport
+go get github.com/mbelinky/claude-code-socket-transport@main
 ```
 
 ## Usage
@@ -229,7 +242,7 @@ and reports receipt states separately from replies as newline-delimited JSON.
 It always sends as an external peer without looking up authentication tokens.
 
 ```sh
-go install github.com/PeterSR/claude-code-socket-transport/cmd/claude-socket@latest
+go install github.com/mbelinky/claude-code-socket-transport/cmd/claude-socket@main
 claude-socket list
 claude-socket ask --session UUID --text 'What is the current status?'
 # From a source checkout, scripts/claude-socket builds a cached local binary.

@@ -19,7 +19,7 @@ import (
 	"text/tabwriter"
 	"time"
 
-	ccsock "github.com/PeterSR/claude-code-socket-transport"
+	ccsock "github.com/mbelinky/claude-code-socket-transport"
 )
 
 // exitError marks a run error with the process exit code it should produce,

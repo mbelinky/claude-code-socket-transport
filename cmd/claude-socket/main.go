@@ -19,7 +19,7 @@ import (
 	"syscall"
 	"time"
 
-	c "github.com/PeterSR/claude-code-socket-transport"
+	c "github.com/mbelinky/claude-code-socket-transport"
 )
 
 const maxText = 512 * 1024

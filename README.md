@@ -13,6 +13,9 @@ claude-socket ask --session UUID --text 'What is the current status?'
 See the [CLI guide](cmd/claude-socket/README.md) for receipt states, exit codes,
 permissions, and account profiles. The original `cc-send` CLI remains available.
 
+The [OpenClaw plugin](openclaw-plugin/README.md) exposes session discovery and
+ask/reply tools to authorized agents on any configured chat channel.
+
 A Go library for delivering a message into a running Claude Code session over
 that session's Unix domain socket.
 

@@ -1,0 +1,71 @@
+{
+  "id": "claude-sessions",
+  "name": "Claude sessions",
+  "description": "Ask existing Claude Code sessions through OpenClaw agents on any channel",
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": [
+      "claude_sessions_list",
+      "claude_sessions_ask"
+    ]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "hosts"
+    ],
+    "properties": {
+      "hosts": {
+        "type": "object",
+        "minProperties": 1,
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "binary",
+            "agents",
+            "sessions"
+          ],
+          "properties": {
+            "binary": {
+              "type": "string",
+              "description": "Absolute claude-socket executable path on the session host."
+            },
+            "configDir": {
+              "type": "string",
+              "description": "Optional absolute Claude account profile directory."
+            },
+            "ssh": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+              "description": "SSH config alias; omit for local execution."
+            },
+            "agents": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "Explicit OpenClaw agent IDs allowed to use this host."
+            },
+            "sessions": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "^(\\*|[a-fA-F0-9]{8}(-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12})$"
+              },
+              "description": "Allowed Claude session UUIDs, or [\"*\"] for every session in this profile."
+            }
+          }
+        }
+      }
+    }
+  }
+}

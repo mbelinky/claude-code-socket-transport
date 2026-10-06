@@ -1,0 +1,30 @@
+name: OpenClaw plugin
+on:
+  push:
+    paths: ['openclaw-plugin/**', '**.go', 'go.mod', 'tests/test_cli.py', '.github/workflows/openclaw-plugin.yml']
+  pull_request:
+    paths: ['openclaw-plugin/**', '**.go', 'go.mod', 'tests/test_cli.py', '.github/workflows/openclaw-plugin.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [24, 26]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: npm test
+        working-directory: openclaw-plugin
+      - run: npm pack --dry-run
+        working-directory: openclaw-plugin
